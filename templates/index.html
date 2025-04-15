@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Fruit Quality Predictor</title>
+</head>
+<body style="font-family: Arial; text-align: center; margin-top: 50px;">
+    <h1>🍎 Fruit Quality Predictor 🍌</h1>
+    <form method="POST" enctype="multipart/form-data">
+        <input type="file" name="file" accept="image/*" required>
+        <br><br>
+        <input type="submit" value="Predict">
+    </form>
+
+    {% if prediction %}
+        {% if prediction.error %}
+            <h2 style="color: red;">Error: {{ prediction.error }}</h2>
+        {% else %}
+            <h2>Prediction: {{ prediction.label }}</h2>
+            <h3>Fruit Quality: {{ prediction.quality }}</h3>
+            <h3>Confidence: {{ prediction.confidence }}</h3>
+            <img src="{{ url_for('static', filename='uploads/' + filename) }}" alt="Uploaded Image" width="200" style="margin-top: 20px;">
+        {% endif %}
+    {% endif %}
+</body>
+</html>
